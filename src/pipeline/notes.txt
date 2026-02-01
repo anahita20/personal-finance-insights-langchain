@@ -1,0 +1,10 @@
+Refactoring Summary for src/pipeline/edu_query.py:
+
+1. Entities Pydantic Model:
+   - CHANGED: Description field now targets "Merchants, Categories, Dates, or Account Names" instead of Student/Course entities.
+   - IMPACT: The NER chain will now extract finance-related terms.
+
+2. PromptRepository Keys (IMPORTANT):
+   - CHANGED: get_db_prompt() now looks for the f 'dbPrompt'.
+   - ACTION REQUIRED: Ensure your new 'sql_prompts.json' file uses the key "sqlPrompt" for the query generation instructions.
+   - NOTE: 'entityRecognition' and 'responsePrompt' keys remain unchanged.

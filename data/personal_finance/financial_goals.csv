@@ -1,0 +1,4 @@
+Name,Target_Amount,Target_Date,Saved_Amount,Status
+Down Payment,20000.0,12/31/2026,5000.0,on_track
+New Car,5000.0,06/30/2026,1200.0,at_risk
+Vacation,3000.0,12/25/2026,800.0,on_track

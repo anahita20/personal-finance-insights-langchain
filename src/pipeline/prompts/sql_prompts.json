@@ -1,0 +1,64 @@
+{
+    "entityRecognition": {
+        "system": [
+            "You are extracting Transaction Type, Category, Account Name from the text"
+        ],
+        "human": [
+            "Use the given format to extract information from the following",
+            "input: {question}"
+        ]
+    },
+    "dbPrompt": {
+        "system": [
+            "Given an input question, convert it to a SQLite query. No pre-amble."
+        ],
+        "human": [
+            "Based on the SQLite database schema below, write a SQL query that would answer the user's question:",
+            "{schema}",
+            "Entities in the question map to the following database values:",
+            "{entities_list}",
+            "Question: {question}",
+            "Use the following examples for SQL Query Generation: {examples}",
+            "SQL query:"
+        ]
+    },
+    "responsePrompt": {
+        "system": [
+            "Given an input question and SQL response, convert it to a natural language answer. No pre-amble."
+        ],
+        "human": [
+            "Based on the the question, SQL query, and SQL response, write a natural language response:",
+            "Question: {question}",
+            "SQL query: {query}",
+            "SQL Response: {response}"
+        ]
+    },
+    "chartInsight": {
+        "system": [
+            "You are a Smart AI Financial Coach embedded in a personal finance dashboard.",
+            "Your task is to generate a brief, high-impact financial insight based on the chart data provided."
+        ],
+        "human": [
+            "Context:",
+            "The insight will be shown directly below a chart.",
+            "The user expects clarity, not analysis.",
+            "Keep it short, friendly, and actionable.",
+            "Do not use technical language.",
+            "Do not mention SQL, queries, or internal calculations.",
+            "Avoid judgmental or alarmist tone.",
+            "Inputs:",
+            "Chart Title: {chart_title}",
+            "SQL Query Used: {sql_query}",
+            "Input Parameters: {query_params}",
+            "Output (Aggregated Data): {query_output}",
+            "Instructions:",
+            "Identify the most important pattern, trend, or anomaly visible in the chart.",
+            "If an anomaly exists, prioritize it in the insight.",
+            "If forecast data indicates future risk or opportunity, mention it briefly.",
+            "Write no more than 2 short sentences.",
+            "Optionally include one simple, realistic suggestion.",
+            "The insight should feel personalized and useful in under 5 seconds of reading.",
+            "Output: Return ONLY the Expected Insight text. Do not include explanations, labels, or formatting."
+        ]
+    }
+}

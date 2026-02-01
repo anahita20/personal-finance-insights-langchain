@@ -1,0 +1,62 @@
+[
+  {
+    "question": "How much did I spend on Groceries last month?",
+    "query": "SELECT SUM(amount) FROM transactions WHERE category = 'groceries' AND date >= date('now', 'start of month', '-1 month') AND date < date('now', 'start of month')"
+  },
+  {
+    "question": "What are my top 5 highest expenses this year?",
+    "query": "SELECT description, amount, date, category FROM transactions WHERE date >= date('now', 'start of year') ORDER BY amount DESC LIMIT 5"
+  },
+  {
+    "question": "List all transactions for 'Uber' from the last 3 months.",
+    "query": "SELECT * FROM transactions WHERE description LIKE '%uber%' AND date >= date('now', '-3 months')"
+  },
+  {
+    "question": "What is the balance of my Checking account?",
+    "query": "SELECT balance FROM accounts WHERE name LIKE '%checking%'"
+  },
+  {
+    "question": "Compare my spending on 'Dining Out' and 'Entertainment' for this month.",
+    "query": "SELECT category, SUM(amount) as total_spent FROM transactions WHERE category IN ('Dining Out', 'Entertainment') AND date >= date('now', 'start of month') GROUP BY category"
+  },
+  {
+    "question": "What is my budget for Shopping?",
+    "query": "SELECT amount_limit FROM monthly_budgets WHERE category = 'shopping'"
+  },
+  {
+    "question": "How much did I spend on coffee in the last month?",
+    "query": "SELECT SUM(amount) FROM transactions WHERE description LIKE '%coffee%' AND date >= date('now', 'start of month', '-1 month') AND date < date('now', 'start of month')"
+  },
+  {
+    "question": "How many times did I go to Starbucks in the past month?",
+    "query": "SELECT COUNT(*) FROM transactions WHERE description LIKE '%starbucks%' AND date >= date('now', 'start of month', '-1 month') AND date < date('now', 'start of month')"
+  },
+  {
+    "question": "Am I over my groceries budget for this month?",
+    "query": "SELECT SUM(t.amount) as total_spent, b.amount_limit FROM transactions t JOIN monthly_budgets b ON t.category = b.category WHERE t.category = 'groceries' AND t.date >= date('now', 'start of month') GROUP BY b.amount_limit HAVING total_spent > b.amount_limit"
+  },
+  {
+    "question": "How many times did I dine out last month?",
+    "query": "SELECT COUNT(*) FROM transactions WHERE category = 'dining out' AND date >= date('now', 'start of month', '-1 month') AND date < date('now', 'start of month')"
+  },
+  {
+    "question": "Which categories have I spent more than my budget on this month?",
+    "query": "SELECT b.category, SUM(t.amount) as total_spent, b.amount_limit FROM transactions t JOIN monthly_budgets b ON t.category = b.category WHERE t.transaction_Type = 'debit' AND t.Date >= date('now', 'start of month') GROUP BY b.category HAVING total_spent > b.amount_limit"
+  },
+  {
+    "question": "Show me all transactions I made using my Checking account at the Grocery Store.",
+    "query": "SELECT * FROM transactions WHERE account_name = 'checking' AND description LIKE '%groceries%'"
+  },
+  {
+    "question": "How many times did I dine out last month?",
+    "query": "SELECT COUNT(*) FROM transactions WHERE category IN ('restaurants', 'fastfood') AND transaction_type = 'debit' AND date >= date('now', 'start of month', '-1 month') AND date < date('now', 'start of month')"
+  },
+  {
+    "question": "How much of my credit card debt did I pay off?",
+    "query": "SELECT SUM(amount) FROM transactions WHERE account_Name IN ('platinumcard', 'silvercard') AND transaction_type = 'credit' AND category = 'creditcardpayment'"
+  },
+  {
+  "question": "How much actual cash will I have left after accounting for my credit card debt?",
+  "query": "SELECT COALESCE((SELECT SUM(balance) FROM accounts WHERE type = 'depository'), 0) - COALESCE((SELECT SUM(balance) FROM accounts WHERE type = 'credit'), 0) AS net_cash_remaining"
+  }
+]
