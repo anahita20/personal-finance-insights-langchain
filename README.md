@@ -1,5 +1,6 @@
 
 # Smart AI Financial Coach
+** Demo:https://vimeo.com/1160883209?share=copy&fl=sv&fe=ci  **
 
 ## Local Setup
 1. **Install Requirements**: Run `pip install -r requirements.txt` 
@@ -30,4 +31,5 @@
 1. **Frontend**: React, Recharts (JavaScript), Tailwind CSS.
 2. **Backend**: Python (Flask), LangChain.
 3. **Database**: SQLite.
+
 4. **AI Layer**: Google Gemini LLM.
